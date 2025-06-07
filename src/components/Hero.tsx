@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 
@@ -12,7 +11,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="pt-32 pb-20 px-6">
+    <section className="pt-48 pb-20 px-6">
       <div className="container mx-auto text-center max-w-4xl">
         <div className="animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">

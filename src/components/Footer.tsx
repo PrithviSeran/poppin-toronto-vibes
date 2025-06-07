@@ -5,12 +5,6 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <img 
-                src="/lovable-uploads/6b3cb97c-171b-494a-af64-d5171f919f1d.png" 
-                alt="Whats Poppin Logo" 
-                className="h-12 w-auto"
-              />
-              <span className="text-xl font-bold">Whats Poppin</span>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
               Discovering Toronto's best activities, one swipe at a time. 

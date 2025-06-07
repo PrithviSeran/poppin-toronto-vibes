@@ -1,9 +1,9 @@
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
+import { supabase } from '@/lib/supabase';
 
 const Waitlist = () => {
   const [email, setEmail] = useState('');
@@ -18,12 +18,24 @@ const Waitlist = () => {
 
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const { error } = await supabase
+        .from('waitlist_users')
+        .insert([
+          { email: email }
+        ]);
+
+      if (error) throw error;
+
       toast.success('Thanks for joining! We\'ll notify you when we launch.');
       setEmail('');
+    } catch (error) {
+      console.log(error);
+      console.error('Error:', error);
+      toast.error('Something went wrong. Please try again.');
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -64,7 +76,6 @@ const Waitlist = () => {
                   🎉 <strong>Early Access Perks:</strong>
                 </p>
                 <ul className="text-sm text-gray-600 mt-2 space-y-1">
-                  <li>• Free premium features for 3 months</li>
                   <li>• Exclusive Toronto event previews</li>
                   <li>• Direct feedback to our team</li>
                 </ul>
@@ -72,17 +83,14 @@ const Waitlist = () => {
             </CardContent>
           </Card>
 
-          <div className="mt-12 grid grid-cols-3 gap-8 max-w-md mx-auto text-center">
-            <div>
+          <div className="mt-12 grid grid-cols-2 gap-8 max-w-md mx-auto text-center">
+            <div className="flex flex-col items-center justify-center">
               <div className="text-2xl font-bold text-brand-red">500+</div>
               <div className="text-sm text-gray-600">Activities</div>
             </div>
-            <div>
-              <div className="text-2xl font-bold text-brand-purple">1000+</div>
-              <div className="text-sm text-gray-600">On Waitlist</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold text-gray-900">Q1 2024</div>
+
+            <div className="flex flex-col items-center justify-center">
+              <div className="text-2xl font-bold text-gray-900">Q2 2025</div>
               <div className="text-sm text-gray-600">Beta Launch</div>
             </div>
           </div>
