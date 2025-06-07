@@ -52,7 +52,7 @@ const Waitlist = () => {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-gradient-to-r from-brand-red to-brand-purple hover:from-red-500 hover:to-purple-500 transition-all duration-300 text-lg py-6 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="w-full bg-gradient-to-r from-[#FF0005] via-[#FF4D9D] via-[#FF69E2] via-[#B97AFF] to-[#9E95BD] hover:opacity-90 transition-all duration-300 text-lg py-6 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'Joining...' : 'Join the Waitlist'}

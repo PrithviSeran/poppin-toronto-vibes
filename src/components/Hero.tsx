@@ -17,7 +17,7 @@ const Hero = () => {
         <div className="animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
             Discover Toronto,
-            <span className="bg-gradient-to-r from-brand-red to-brand-purple bg-clip-text text-transparent"> One Swipe</span> at a Time
+            <span className="bg-gradient-to-r from-[#FF0005] via-[#FF4D9D] via-[#FF69E2] via-[#B97AFF] to-[#9E95BD] bg-clip-text text-transparent"> One Swipe</span> at a Time
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
@@ -29,7 +29,7 @@ const Hero = () => {
             <Button 
               onClick={scrollToWaitlist}
               size="lg"
-              className="bg-gradient-to-r from-brand-red to-brand-purple hover:from-red-500 hover:to-purple-500 transition-all duration-300 text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="bg-gradient-to-r from-[#FF0005] via-[#FF4D9D] via-[#FF69E2] via-[#B97AFF] to-[#9E95BD] hover:opacity-90 transition-all duration-300 text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               Join the Waitlist
             </Button>

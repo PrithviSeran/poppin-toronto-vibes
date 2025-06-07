@@ -11,7 +11,7 @@ const Header = () => {
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <div className="flex items-center">
           <img 
-            src="/lovable-uploads/b2bd165a-364b-454d-bba5-9b14c31b48af.png" 
+            src="/lovable-uploads/6b3cb97c-171b-494a-af64-d5171f919f1d.png" 
             alt="Whats Poppin Logo" 
             className="h-16 w-auto"
           />
