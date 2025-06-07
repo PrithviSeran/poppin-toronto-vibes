@@ -1,0 +1,48 @@
+
+const Footer = () => {
+  return (
+    <footer className="py-12 px-6 bg-gray-900 text-white">
+      <div className="container mx-auto max-w-6xl">
+        <div className="grid md:grid-cols-4 gap-8">
+          <div className="md:col-span-2">
+            <div className="flex items-center space-x-3 mb-4">
+              <img 
+                src="/lovable-uploads/26c38a7a-40e1-484b-a591-2ae4ee6ef625.png" 
+                alt="Whats Poppin Logo" 
+                className="h-8 w-auto"
+              />
+              <span className="text-xl font-bold">Whats Poppin</span>
+            </div>
+            <p className="text-gray-400 mb-4 max-w-md">
+              Discovering Toronto's best activities, one swipe at a time. 
+              Join the community that's redefining how we explore our city.
+            </p>
+            <div className="text-sm text-gray-500">
+              © 2024 Whats Poppin. All rights reserved.
+            </div>
+          </div>
+          
+          <div>
+            <h4 className="font-semibold mb-4">Product</h4>
+            <ul className="space-y-2 text-gray-400">
+              <li><a href="#features" className="hover:text-white transition-colors">Features</a></li>
+              <li><a href="#demo" className="hover:text-white transition-colors">Demo</a></li>
+              <li><a href="#waitlist" className="hover:text-white transition-colors">Beta Access</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 className="font-semibold mb-4">Connect</h4>
+            <ul className="space-y-2 text-gray-400">
+              <li><a href="mailto:hello@whatspoppin.app" className="hover:text-white transition-colors">Contact</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Instagram</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Twitter</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
