@@ -1,4 +1,3 @@
-
 const Footer = () => {
   return (
     <footer className="py-12 px-6 bg-gray-900 text-white">
@@ -9,7 +8,7 @@ const Footer = () => {
               <img 
                 src="/lovable-uploads/b2bd165a-364b-454d-bba5-9b14c31b48af.png" 
                 alt="Whats Poppin Logo" 
-                className="h-8 w-auto"
+                className="h-12 w-auto"
               />
               <span className="text-xl font-bold">Whats Poppin</span>
             </div>

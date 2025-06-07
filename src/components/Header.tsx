@@ -13,7 +13,7 @@ const Header = () => {
           <img 
             src="/lovable-uploads/b2bd165a-364b-454d-bba5-9b14c31b48af.png" 
             alt="Whats Poppin Logo" 
-            className="h-10 w-auto"
+            className="h-16 w-auto"
           />
         </div>
         
