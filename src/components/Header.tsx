@@ -9,13 +9,12 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center">
           <img 
-            src="/lovable-uploads/26c38a7a-40e1-484b-a591-2ae4ee6ef625.png" 
+            src="/lovable-uploads/b2bd165a-364b-454d-bba5-9b14c31b48af.png" 
             alt="Whats Poppin Logo" 
             className="h-10 w-auto"
           />
-          <span className="text-2xl font-bold text-gray-900">Whats Poppin</span>
         </div>
         
         <nav className="hidden md:flex items-center space-x-8">

@@ -7,7 +7,7 @@ const Footer = () => {
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
               <img 
-                src="/lovable-uploads/26c38a7a-40e1-484b-a591-2ae4ee6ef625.png" 
+                src="/lovable-uploads/b2bd165a-364b-454d-bba5-9b14c31b48af.png" 
                 alt="Whats Poppin Logo" 
                 className="h-8 w-auto"
               />

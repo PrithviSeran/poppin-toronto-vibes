@@ -15,12 +15,6 @@ const Hero = () => {
     <section className="pt-32 pb-20 px-6">
       <div className="container mx-auto text-center max-w-4xl">
         <div className="animate-fade-in">
-          <img 
-            src="/lovable-uploads/26c38a7a-40e1-484b-a591-2ae4ee6ef625.png" 
-            alt="Whats Poppin Logo" 
-            className="h-20 w-auto mx-auto mb-8"
-          />
-          
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
             Discover Toronto,
             <span className="bg-gradient-to-r from-brand-red to-brand-purple bg-clip-text text-transparent"> One Swipe</span> at a Time
