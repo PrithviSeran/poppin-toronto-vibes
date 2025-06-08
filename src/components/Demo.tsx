@@ -175,7 +175,7 @@ const Demo = () => {
                           playsInline
                           preload="metadata"
                           webkit-playsinline="true"
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover object-bottom"
                           data-feature={activeFeature}
                           onPlay={() => setVideoPlaying(true)}
                           onPause={() => setVideoPlaying(false)}
@@ -263,7 +263,7 @@ const Demo = () => {
                 className="transition-all duration-500"
                 data-feature-index={index}
               >
-                <div className="bg-white rounded-2xl p-6 shadow-lg border">
+                <div className="bg-white rounded-2xl p-6 shadow-lg border w-full max-w-2xl mx-auto">
                   <h3 className="text-2xl font-bold text-gray-900 mb-3">
                     {feature.title}
                   </h3>
@@ -306,14 +306,14 @@ const Demo = () => {
                         {/* Video Container */}
                         <div className="h-full relative" style={{ height: 'calc(100% - 2rem)' }}>
                           <video
-                            key={`${feature.id}-mobile`}
+                            id={`mobile-video-${index}`}
                             autoPlay={!isMobile}
                             muted
                             loop
                             playsInline
                             preload="metadata"
                             webkit-playsinline="true"
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover object-bottom"
                             onPlay={() => setVideoPlaying(true)}
                             onPause={() => setVideoPlaying(false)}
                           >
@@ -326,7 +326,7 @@ const Demo = () => {
                             <div 
                               className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center cursor-pointer"
                               onClick={() => {
-                                const video = document.querySelector(`video[key="${feature.id}-mobile"]`) as HTMLVideoElement;
+                                const video = document.getElementById(`mobile-video-${index}`) as HTMLVideoElement;
                                 if (video) {
                                   video.play().then(() => {
                                     setVideoPlaying(true);
