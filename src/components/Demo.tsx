@@ -138,86 +138,86 @@ const Demo = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Sticky Video Section */}
-          <div className="lg:sticky lg:top-32 order-2 lg:order-1">
-            <div className="relative w-72 sm:w-80 mx-auto">
-              {/* iPhone 12 Frame */}
-              <div className="bg-gray-900 rounded-[3rem] p-1 shadow-2xl">
-                <div className="bg-black rounded-[2.8rem] p-1">
-                  <div className="bg-white rounded-[2.5rem] overflow-hidden relative" style={{ aspectRatio: '9/19.5' }}>
-                    {/* iPhone Status Bar */}
-                    <div className="bg-black text-white text-xs sm:text-sm py-2 px-4 sm:px-6 flex justify-between items-center">
-                      <span className="font-medium">9:41</span>
-                      <div className="flex items-center space-x-1">
-                        <div className="flex space-x-1">
-                          <div className="w-1 h-1 bg-white rounded-full"></div>
-                          <div className="w-1 h-1 bg-white rounded-full"></div>
-                          <div className="w-1 h-1 bg-white rounded-full"></div>
-                          <div className="w-1 h-1 bg-white rounded-full"></div>
-                        </div>
-                        <div className="w-5 sm:w-6 h-2 sm:h-3 border border-white rounded-sm relative">
-                          <div className="w-full h-full bg-white rounded-sm"></div>
-                          <div className="absolute -right-0.5 top-1/2 transform -translate-y-1/2 w-0.5 h-1 bg-white rounded-r"></div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Video Container - Below Status Bar */}
-                    <div className="h-full relative" style={{ height: 'calc(100% - 2.5rem)' }}>
-                      <video
-                        key={features[activeFeature].video}
-                        autoPlay={!isMobile}
-                        muted
-                        loop
-                        playsInline
-                        preload="metadata"
-                        webkit-playsinline="true"
-                        className="w-full h-full object-cover"
-                        data-feature={activeFeature}
-                        onPlay={() => setVideoPlaying(true)}
-                        onPause={() => setVideoPlaying(false)}
-                      >
-                        <source src={features[activeFeature].video} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                      
-                      {/* Mobile Play Button Overlay */}
-                      {isMobile && !videoPlaying && (
-                        <div 
-                          className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center cursor-pointer"
-                          onClick={handleVideoPlay}
-                        >
-                          <div className="bg-white bg-opacity-90 rounded-full p-4 hover:bg-opacity-100 transition-all duration-300">
-                            <Play className="w-8 h-8 text-gray-900 fill-current" />
+        <div className="max-w-7xl mx-auto">
+          {/* Desktop Version - 2-column layout with iPhone */}
+          <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center">
+            {/* iPhone Section */}
+            <div className="lg:sticky lg:top-32">
+              <div className="relative w-80 mx-auto">
+                {/* iPhone 12 Frame */}
+                <div className="bg-gray-900 rounded-[3rem] p-1 shadow-2xl">
+                  <div className="bg-black rounded-[2.8rem] p-1">
+                    <div className="bg-white rounded-[2.5rem] overflow-hidden relative" style={{ aspectRatio: '9/19.5' }}>
+                      {/* iPhone Status Bar */}
+                      <div className="bg-black text-white text-sm py-2 px-6 flex justify-between items-center">
+                        <span className="font-medium">9:41</span>
+                        <div className="flex items-center space-x-1">
+                          <div className="flex space-x-1">
+                            <div className="w-1 h-1 bg-white rounded-full"></div>
+                            <div className="w-1 h-1 bg-white rounded-full"></div>
+                            <div className="w-1 h-1 bg-white rounded-full"></div>
+                            <div className="w-1 h-1 bg-white rounded-full"></div>
+                          </div>
+                          <div className="w-6 h-3 border border-white rounded-sm relative">
+                            <div className="w-full h-full bg-white rounded-sm"></div>
+                            <div className="absolute -right-0.5 top-1/2 transform -translate-y-1/2 w-0.5 h-1 bg-white rounded-r"></div>
                           </div>
                         </div>
-                      )}
+                      </div>
+                      
+                      {/* Video Container */}
+                      <div className="h-full relative" style={{ height: 'calc(100% - 3rem)' }}>
+                        <video
+                          key={features[activeFeature].video}
+                          autoPlay={!isMobile}
+                          muted
+                          loop
+                          playsInline
+                          preload="metadata"
+                          webkit-playsinline="true"
+                          className="w-full h-full object-cover"
+                          data-feature={activeFeature}
+                          onPlay={() => setVideoPlaying(true)}
+                          onPause={() => setVideoPlaying(false)}
+                        >
+                          <source src={features[activeFeature].video} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+                        
+                        {/* Mobile Play Button Overlay */}
+                        {isMobile && !videoPlaying && (
+                          <div 
+                            className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center cursor-pointer"
+                            onClick={handleVideoPlay}
+                          >
+                            <div className="bg-white bg-opacity-90 rounded-full p-4 hover:bg-opacity-100 transition-all duration-300">
+                              <Play className="w-8 h-8 text-gray-900 fill-current" />
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              
-              {/* Video Indicators - Below Phone */}
-              <div className="flex justify-center space-x-2 mt-4 sm:mt-6">
-                {features.map((_, index) => (
-                  <div
-                    key={index}
-                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-                      index === activeFeature 
-                        ? 'bg-gradient-to-r from-[#FF0005] to-[#9E95BD] scale-110' 
-                        : 'bg-gray-300'
-                    }`}
-                  />
-                ))}
+                
+                {/* Video Indicators - Below Phone */}
+                <div className="flex justify-center space-x-2 mt-6">
+                  {features.map((_, index) => (
+                    <div
+                      key={index}
+                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                        index === activeFeature 
+                          ? 'bg-gradient-to-r from-[#FF0005] to-[#9E95BD] scale-110' 
+                          : 'bg-gray-300'
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Content Section */}
-          <div className="order-1 lg:order-2">
-            {/* Desktop Version - Show only active feature with navigation */}
-            <div className="hidden lg:flex flex-col justify-center min-h-[600px]">
+            {/* Content Section */}
+            <div className="flex flex-col justify-center min-h-[600px]">
               <div className="bg-white rounded-2xl p-8 shadow-lg border transition-all duration-500">
                 <h3 className="text-3xl font-bold text-gray-900 mb-4">
                   {features[activeFeature].title}
@@ -253,103 +253,101 @@ const Demo = () => {
                 </button>
               </div>
             </div>
+          </div>
 
-            {/* Mobile Version - Scrollable features */}
-            <div className="lg:hidden space-y-8 px-4">
-              {features.map((feature, index) => (
-                <div
-                  key={feature.id}
-                  className={`transition-all duration-500 ${
-                    index === activeFeature ? 'opacity-100' : 'opacity-70'
-                  }`}
-                  data-feature-index={index}
-                >
-                  <div className="bg-white rounded-2xl p-6 shadow-lg border">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                      {feature.title}
-                    </h3>
-                    <p className="text-base text-gray-600 mb-4 leading-relaxed">
-                      {feature.description}
-                    </p>
-                    <ul className="space-y-2">
-                      {feature.highlights.map((highlight, idx) => (
-                        <li key={idx} className="flex items-center text-sm text-gray-700">
-                          <div className="w-2 h-2 bg-gradient-to-r from-[#FF0005] to-[#9E95BD] rounded-full mr-3 flex-shrink-0"></div>
-                          {highlight}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  {/* Video for this feature - Outside the description card */}
-                  <div className="relative w-64 mx-auto mt-6">
-                    {/* iPhone 12 Frame */}
-                    <div className="bg-gray-900 rounded-[2.5rem] p-1 shadow-xl">
-                      <div className="bg-black rounded-[2.2rem] p-1">
-                        <div className="bg-white rounded-[2rem] overflow-hidden relative" style={{ aspectRatio: '9/19.5' }}>
-                          {/* iPhone Status Bar */}
-                          <div className="bg-black text-white text-xs py-1.5 px-3 flex justify-between items-center">
-                            <span className="font-medium">9:41</span>
-                            <div className="flex items-center space-x-1">
-                              <div className="flex space-x-0.5">
-                                <div className="w-0.5 h-0.5 bg-white rounded-full"></div>
-                                <div className="w-0.5 h-0.5 bg-white rounded-full"></div>
-                                <div className="w-0.5 h-0.5 bg-white rounded-full"></div>
-                                <div className="w-0.5 h-0.5 bg-white rounded-full"></div>
-                              </div>
-                              <div className="w-4 h-2 border border-white rounded-sm relative">
-                                <div className="w-full h-full bg-white rounded-sm"></div>
-                                <div className="absolute -right-0.5 top-1/2 transform -translate-y-1/2 w-0.5 h-0.5 bg-white rounded-r"></div>
-                              </div>
+          {/* Mobile Version - Scrollable features */}
+          <div className="lg:hidden space-y-8 px-4">
+            {features.map((feature, index) => (
+              <div
+                key={feature.id}
+                className="transition-all duration-500"
+                data-feature-index={index}
+              >
+                <div className="bg-white rounded-2xl p-6 shadow-lg border">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-base text-gray-600 mb-4 leading-relaxed">
+                    {feature.description}
+                  </p>
+                  <ul className="space-y-2">
+                    {feature.highlights.map((highlight, idx) => (
+                      <li key={idx} className="flex items-center text-sm text-gray-700">
+                        <div className="w-2 h-2 bg-gradient-to-r from-[#FF0005] to-[#9E95BD] rounded-full mr-3 flex-shrink-0"></div>
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                {/* Video for this feature - Outside the description card */}
+                <div className="relative w-64 mx-auto mt-6">
+                  {/* iPhone 12 Frame */}
+                  <div className="bg-gray-900 rounded-[2.5rem] p-1 shadow-xl">
+                    <div className="bg-black rounded-[2.2rem] p-1">
+                      <div className="bg-white rounded-[2rem] overflow-hidden relative" style={{ aspectRatio: '9/19.5' }}>
+                        {/* iPhone Status Bar */}
+                        <div className="bg-black text-white text-xs py-1.5 px-3 flex justify-between items-center">
+                          <span className="font-medium">9:41</span>
+                          <div className="flex items-center space-x-1">
+                            <div className="flex space-x-0.5">
+                              <div className="w-0.5 h-0.5 bg-white rounded-full"></div>
+                              <div className="w-0.5 h-0.5 bg-white rounded-full"></div>
+                              <div className="w-0.5 h-0.5 bg-white rounded-full"></div>
+                              <div className="w-0.5 h-0.5 bg-white rounded-full"></div>
+                            </div>
+                            <div className="w-4 h-2 border border-white rounded-sm relative">
+                              <div className="w-full h-full bg-white rounded-sm"></div>
+                              <div className="absolute -right-0.5 top-1/2 transform -translate-y-1/2 w-0.5 h-0.5 bg-white rounded-r"></div>
                             </div>
                           </div>
+                        </div>
+                        
+                        {/* Video Container */}
+                        <div className="h-full relative" style={{ height: 'calc(100% - 2rem)' }}>
+                          <video
+                            key={`${feature.id}-mobile`}
+                            autoPlay={!isMobile}
+                            muted
+                            loop
+                            playsInline
+                            preload="metadata"
+                            webkit-playsinline="true"
+                            className="w-full h-full object-cover"
+                            onPlay={() => setVideoPlaying(true)}
+                            onPause={() => setVideoPlaying(false)}
+                          >
+                            <source src={feature.video} type="video/mp4" />
+                            Your browser does not support the video tag.
+                          </video>
                           
-                          {/* Video Container */}
-                          <div className="h-full relative" style={{ height: 'calc(100% - 2rem)' }}>
-                            <video
-                              key={`${feature.id}-mobile`}
-                              autoPlay={!isMobile}
-                              muted
-                              loop
-                              playsInline
-                              preload="metadata"
-                              webkit-playsinline="true"
-                              className="w-full h-full object-cover"
-                              onPlay={() => setVideoPlaying(true)}
-                              onPause={() => setVideoPlaying(false)}
+                          {/* Mobile Play Button Overlay */}
+                          {isMobile && !videoPlaying && (
+                            <div 
+                              className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center cursor-pointer"
+                              onClick={() => {
+                                const video = document.querySelector(`video[key="${feature.id}-mobile"]`) as HTMLVideoElement;
+                                if (video) {
+                                  video.play().then(() => {
+                                    setVideoPlaying(true);
+                                  }).catch((error) => {
+                                    console.log('Video play failed:', error);
+                                  });
+                                }
+                              }}
                             >
-                              <source src={feature.video} type="video/mp4" />
-                              Your browser does not support the video tag.
-                            </video>
-                            
-                            {/* Mobile Play Button Overlay */}
-                            {isMobile && !videoPlaying && (
-                              <div 
-                                className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center cursor-pointer"
-                                onClick={() => {
-                                  const video = document.querySelector(`video[key="${feature.id}-mobile"]`) as HTMLVideoElement;
-                                  if (video) {
-                                    video.play().then(() => {
-                                      setVideoPlaying(true);
-                                    }).catch((error) => {
-                                      console.log('Video play failed:', error);
-                                    });
-                                  }
-                                }}
-                              >
-                                <div className="bg-white bg-opacity-90 rounded-full p-3 hover:bg-opacity-100 transition-all duration-300">
-                                  <Play className="w-6 h-6 text-gray-900 fill-current" />
-                                </div>
+                              <div className="bg-white bg-opacity-90 rounded-full p-3 hover:bg-opacity-100 transition-all duration-300">
+                                <Play className="w-6 h-6 text-gray-900 fill-current" />
                               </div>
-                            )}
-                          </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
