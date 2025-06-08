@@ -34,6 +34,36 @@ const Demo = () => {
     }
   }, [activeFeature, isMobile]);
 
+  useEffect(() => {
+    // Mobile scroll-based feature detection
+    if (!isMobile) return;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -20% 0px',
+      threshold: 0.5
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = parseInt(entry.target.getAttribute('data-feature-index') || '0');
+          setActiveFeature(index);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    
+    // Observe all mobile feature elements
+    const featureElements = document.querySelectorAll('[data-feature-index]');
+    featureElements.forEach((element) => observer.observe(element));
+
+    return () => {
+      featureElements.forEach((element) => observer.unobserve(element));
+    };
+  }, [isMobile]);
+
   const handleVideoPlay = () => {
     const video = document.querySelector(`video[data-feature="${activeFeature}"]`) as HTMLVideoElement;
     if (video) {
@@ -184,41 +214,74 @@ const Demo = () => {
             </div>
           </div>
 
-          {/* Content Section - Show only active feature */}
-          <div className="flex flex-col justify-center min-h-[400px] lg:min-h-[600px] order-1 lg:order-2 px-4 sm:px-0">
-            <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg border transition-all duration-500">
-              <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
-                {features[activeFeature].title}
-              </h3>
-              <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6 leading-relaxed">
-                {features[activeFeature].description}
-              </p>
-              <ul className="space-y-2 sm:space-y-3">
-                {features[activeFeature].highlights.map((highlight, idx) => (
-                  <li key={idx} className="flex items-center text-sm sm:text-base text-gray-700">
-                    <div className="w-2 h-2 bg-gradient-to-r from-[#FF0005] to-[#9E95BD] rounded-full mr-3 flex-shrink-0"></div>
-                    {highlight}
-                  </li>
-                ))}
-              </ul>
+          {/* Content Section */}
+          <div className="order-1 lg:order-2">
+            {/* Desktop Version - Show only active feature with navigation */}
+            <div className="hidden lg:flex flex-col justify-center min-h-[600px]">
+              <div className="bg-white rounded-2xl p-8 shadow-lg border transition-all duration-500">
+                <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                  {features[activeFeature].title}
+                </h3>
+                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                  {features[activeFeature].description}
+                </p>
+                <ul className="space-y-3">
+                  {features[activeFeature].highlights.map((highlight, idx) => (
+                    <li key={idx} className="flex items-center text-gray-700">
+                      <div className="w-2 h-2 bg-gradient-to-r from-[#FF0005] to-[#9E95BD] rounded-full mr-3 flex-shrink-0"></div>
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              {/* Desktop Navigation Controls */}
+              <div className="flex justify-center mt-8 space-x-4">
+                <button
+                  onClick={() => setActiveFeature(Math.max(0, activeFeature - 1))}
+                  disabled={activeFeature === 0}
+                  className="px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Previous
+                </button>
+                <button
+                  onClick={() => setActiveFeature(Math.min(features.length - 1, activeFeature + 1))}
+                  disabled={activeFeature === features.length - 1}
+                  className="px-6 py-3 bg-gradient-to-r from-[#FF0005] to-[#9E95BD] text-white rounded-full font-medium transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Next
+                </button>
+              </div>
             </div>
-            
-            {/* Navigation Controls */}
-            <div className="flex justify-center mt-6 sm:mt-8 space-x-3 sm:space-x-4 px-4">
-              <button
-                onClick={() => setActiveFeature(Math.max(0, activeFeature - 1))}
-                disabled={activeFeature === 0}
-                className="px-4 sm:px-6 py-2 sm:py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
-              >
-                Previous
-              </button>
-              <button
-                onClick={() => setActiveFeature(Math.min(features.length - 1, activeFeature + 1))}
-                disabled={activeFeature === features.length - 1}
-                className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[#FF0005] to-[#9E95BD] text-white rounded-full font-medium transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
-              >
-                Next
-              </button>
+
+            {/* Mobile Version - Scrollable features */}
+            <div className="lg:hidden space-y-8 px-4">
+              {features.map((feature, index) => (
+                <div
+                  key={feature.id}
+                  className={`transition-all duration-500 ${
+                    index === activeFeature ? 'opacity-100' : 'opacity-70'
+                  }`}
+                  data-feature-index={index}
+                >
+                  <div className="bg-white rounded-2xl p-6 shadow-lg border">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                      {feature.title}
+                    </h3>
+                    <p className="text-base text-gray-600 mb-4 leading-relaxed">
+                      {feature.description}
+                    </p>
+                    <ul className="space-y-2">
+                      {feature.highlights.map((highlight, idx) => (
+                        <li key={idx} className="flex items-center text-sm text-gray-700">
+                          <div className="w-2 h-2 bg-gradient-to-r from-[#FF0005] to-[#9E95BD] rounded-full mr-3 flex-shrink-0"></div>
+                          {highlight}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

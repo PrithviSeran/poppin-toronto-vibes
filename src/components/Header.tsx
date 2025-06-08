@@ -5,6 +5,11 @@ import { Menu, X } from "lucide-react";
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const scrollToHero = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setMobileMenuOpen(false);
+  };
+
   const scrollToWaitlist = () => {
     document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' });
     setMobileMenuOpen(false);
@@ -24,11 +29,13 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <div className="flex items-center">
-          <img 
-            src="/lovable-uploads/6b3cb97c-171b-494a-af64-d5171f919f1d.png" 
-            alt="Whats Poppin Logo" 
-            className="h-12 sm:h-16 w-auto"
-          />
+          <button onClick={scrollToHero} className="flex items-center hover:opacity-80 transition-opacity">
+            <img 
+              src="/lovable-uploads/6b3cb97c-171b-494a-af64-d5171f919f1d.png" 
+              alt="Whats Poppin Logo" 
+              className="h-12 sm:h-16 w-auto"
+            />
+          </button>
         </div>
         
         {/* Desktop Navigation */}
