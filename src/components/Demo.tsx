@@ -1,7 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Play } from 'lucide-react';
 
 const Demo = () => {
   const [activeFeature, setActiveFeature] = useState(0);
+  const [videoPlaying, setVideoPlaying] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Check if device is mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    // Reset video playing state when feature changes
+    setVideoPlaying(false);
+    
+    // For non-mobile devices, try to auto-play the new video
+    if (!isMobile) {
+      setTimeout(() => {
+        const video = document.querySelector(`video[data-feature="${activeFeature}"]`) as HTMLVideoElement;
+        if (video) {
+          video.play().catch(() => {
+            // Autoplay failed, which is fine
+          });
+        }
+      }, 100);
+    }
+  }, [activeFeature, isMobile]);
+
+  const handleVideoPlay = () => {
+    const video = document.querySelector(`video[data-feature="${activeFeature}"]`) as HTMLVideoElement;
+    if (video) {
+      video.play().then(() => {
+        setVideoPlaying(true);
+      }).catch((error) => {
+        console.log('Video play failed:', error);
+      });
+    }
+  };
 
   const features = [
     {
@@ -66,16 +108,16 @@ const Demo = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Sticky Video Section */}
-          <div className="lg:sticky lg:top-32">
-            <div className="relative w-80 mx-auto">
+          <div className="lg:sticky lg:top-32 order-2 lg:order-1">
+            <div className="relative w-72 sm:w-80 mx-auto">
               {/* iPhone 12 Frame */}
               <div className="bg-gray-900 rounded-[3rem] p-1 shadow-2xl">
                 <div className="bg-black rounded-[2.8rem] p-1">
                   <div className="bg-white rounded-[2.5rem] overflow-hidden relative" style={{ aspectRatio: '9/19.5' }}>
                     {/* iPhone Status Bar */}
-                    <div className="bg-black text-white text-sm py-2 px-6 flex justify-between items-center">
+                    <div className="bg-black text-white text-xs sm:text-sm py-2 px-4 sm:px-6 flex justify-between items-center">
                       <span className="font-medium">9:41</span>
                       <div className="flex items-center space-x-1">
                         <div className="flex space-x-1">
@@ -84,7 +126,7 @@ const Demo = () => {
                           <div className="w-1 h-1 bg-white rounded-full"></div>
                           <div className="w-1 h-1 bg-white rounded-full"></div>
                         </div>
-                        <div className="w-6 h-3 border border-white rounded-sm relative">
+                        <div className="w-5 sm:w-6 h-2 sm:h-3 border border-white rounded-sm relative">
                           <div className="w-full h-full bg-white rounded-sm"></div>
                           <div className="absolute -right-0.5 top-1/2 transform -translate-y-1/2 w-0.5 h-1 bg-white rounded-r"></div>
                         </div>
@@ -92,29 +134,46 @@ const Demo = () => {
                     </div>
                     
                     {/* Video Container - Below Status Bar */}
-                    <div className="h-full" style={{ height: 'calc(100% - 3rem)' }}>
+                    <div className="h-full relative" style={{ height: 'calc(100% - 2.5rem)' }}>
                       <video
                         key={features[activeFeature].video}
-                        autoPlay
+                        autoPlay={!isMobile}
                         muted
                         loop
                         playsInline
+                        preload="metadata"
+                        webkit-playsinline="true"
                         className="w-full h-full object-cover"
+                        data-feature={activeFeature}
+                        onPlay={() => setVideoPlaying(true)}
+                        onPause={() => setVideoPlaying(false)}
                       >
                         <source src={features[activeFeature].video} type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
+                      
+                      {/* Mobile Play Button Overlay */}
+                      {isMobile && !videoPlaying && (
+                        <div 
+                          className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center cursor-pointer"
+                          onClick={handleVideoPlay}
+                        >
+                          <div className="bg-white bg-opacity-90 rounded-full p-4 hover:bg-opacity-100 transition-all duration-300">
+                            <Play className="w-8 h-8 text-gray-900 fill-current" />
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
               
               {/* Video Indicators - Below Phone */}
-              <div className="flex justify-center space-x-2 mt-6">
+              <div className="flex justify-center space-x-2 mt-4 sm:mt-6">
                 {features.map((_, index) => (
                   <div
                     key={index}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                       index === activeFeature 
                         ? 'bg-gradient-to-r from-[#FF0005] to-[#9E95BD] scale-110' 
                         : 'bg-gray-300'
@@ -126,17 +185,17 @@ const Demo = () => {
           </div>
 
           {/* Content Section - Show only active feature */}
-          <div className="flex flex-col justify-center min-h-[600px]">
-            <div className="bg-white rounded-2xl p-8 shadow-lg border transition-all duration-500">
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="flex flex-col justify-center min-h-[400px] lg:min-h-[600px] order-1 lg:order-2 px-4 sm:px-0">
+            <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg border transition-all duration-500">
+              <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
                 {features[activeFeature].title}
               </h3>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6 leading-relaxed">
                 {features[activeFeature].description}
               </p>
-              <ul className="space-y-3">
+              <ul className="space-y-2 sm:space-y-3">
                 {features[activeFeature].highlights.map((highlight, idx) => (
-                  <li key={idx} className="flex items-center text-gray-700">
+                  <li key={idx} className="flex items-center text-sm sm:text-base text-gray-700">
                     <div className="w-2 h-2 bg-gradient-to-r from-[#FF0005] to-[#9E95BD] rounded-full mr-3 flex-shrink-0"></div>
                     {highlight}
                   </li>
@@ -145,18 +204,18 @@ const Demo = () => {
             </div>
             
             {/* Navigation Controls */}
-            <div className="flex justify-center mt-8 space-x-4">
+            <div className="flex justify-center mt-6 sm:mt-8 space-x-3 sm:space-x-4 px-4">
               <button
                 onClick={() => setActiveFeature(Math.max(0, activeFeature - 1))}
                 disabled={activeFeature === 0}
-                className="px-6 py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-gray-100 text-gray-700 rounded-full font-medium transition-all duration-300 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
               >
                 Previous
               </button>
               <button
                 onClick={() => setActiveFeature(Math.min(features.length - 1, activeFeature + 1))}
                 disabled={activeFeature === features.length - 1}
-                className="px-6 py-3 bg-gradient-to-r from-[#FF0005] to-[#9E95BD] text-white rounded-full font-medium transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-[#FF0005] to-[#9E95BD] text-white rounded-full font-medium transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
               >
                 Next
               </button>
