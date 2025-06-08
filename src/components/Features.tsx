@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 
 const Features = () => {
@@ -19,9 +18,9 @@ const Features = () => {
       icon: "⚡"
     },
     {
-      title: "Social Discovery",
-      description: "Connect with like-minded people through shared activity interests",
-      icon: "👥"
+      title: "Event Curation",
+      description: "Handpicked activities and events from Toronto's most exciting and niche venues and organizers",
+      icon: "🎯"
     }
   ];
 
