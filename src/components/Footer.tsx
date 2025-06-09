@@ -27,9 +27,8 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Connect</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="mailto:hello@whatspoppin.app" className="hover:text-white transition-colors">Contact</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Instagram</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Twitter</a></li>
+              <li><a href="mailto:help@whatspoppin.info" className="hover:text-white transition-colors">Contact</a></li>
+
             </ul>
           </div>
         </div>

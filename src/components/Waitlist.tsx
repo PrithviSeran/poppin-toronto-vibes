@@ -85,7 +85,7 @@ const Waitlist = () => {
 
           <div className="mt-12 grid grid-cols-2 gap-8 max-w-md mx-auto text-center">
             <div className="flex flex-col items-center justify-center">
-              <div className="text-2xl font-bold text-brand-red">500+</div>
+              <div className="text-2xl font-bold text-brand-red">500,000+</div>
               <div className="text-sm text-gray-600">Activities</div>
             </div>
 
