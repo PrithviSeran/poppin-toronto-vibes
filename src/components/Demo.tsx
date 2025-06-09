@@ -308,7 +308,7 @@ const Demo = () => {
                         <div className="h-full relative" style={{ height: 'calc(100% - 2rem)' }}>
                           <video
                             id={`mobile-video-${index}`}
-                            autoPlay={false}
+                            autoPlay
                             muted
                             loop
                             playsInline
@@ -321,32 +321,6 @@ const Demo = () => {
                             <source src={feature.video} type="video/mp4" />
                             Your browser does not support the video tag.
                           </video>
-                          
-                          {/* Mobile Play Button Overlay - Show only when video is paused */}
-                          {isMobile && !mobileVideosPlaying[index] && (
-                            <div 
-                              className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center cursor-pointer"
-                              onClick={() => {
-                                const video = document.getElementById(`mobile-video-${index}`) as HTMLVideoElement;
-                                if (video) {
-                                  if (video.paused) {
-                                    video.play().then(() => {
-                                      setMobileVideosPlaying(prev => ({ ...prev, [index]: true }));
-                                    }).catch((error) => {
-                                      console.log('Video play failed:', error);
-                                    });
-                                  } else {
-                                    video.pause();
-                                    setMobileVideosPlaying(prev => ({ ...prev, [index]: false }));
-                                  }
-                                }
-                              }}
-                            >
-                              <div className="bg-white bg-opacity-90 rounded-full p-3 hover:bg-opacity-100 transition-all duration-300">
-                                <Play className="w-6 h-6 text-gray-900 fill-current" />
-                              </div>
-                            </div>
-                          )}
                         </div>
                       </div>
                     </div>
