@@ -4,6 +4,7 @@ import { Play } from 'lucide-react';
 const Demo = () => {
   const [activeFeature, setActiveFeature] = useState(0);
   const [videoPlaying, setVideoPlaying] = useState(false);
+  const [mobileVideosPlaying, setMobileVideosPlaying] = useState<{[key: number]: boolean}>({});
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -314,15 +315,15 @@ const Demo = () => {
                             preload="metadata"
                             webkit-playsinline="true"
                             className="w-full h-full object-cover object-bottom"
-                            onPlay={() => setVideoPlaying(true)}
-                            onPause={() => setVideoPlaying(false)}
+                            onPlay={() => setMobileVideosPlaying(prev => ({ ...prev, [index]: true }))}
+                            onPause={() => setMobileVideosPlaying(prev => ({ ...prev, [index]: false }))}
                           >
                             <source src={feature.video} type="video/mp4" />
                             Your browser does not support the video tag.
                           </video>
                           
-                          {/* Mobile Play Button Overlay - Always show on mobile */}
-                          {isMobile && (
+                          {/* Mobile Play Button Overlay - Show only when video is paused */}
+                          {isMobile && !mobileVideosPlaying[index] && (
                             <div 
                               className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center cursor-pointer"
                               onClick={() => {
@@ -330,13 +331,13 @@ const Demo = () => {
                                 if (video) {
                                   if (video.paused) {
                                     video.play().then(() => {
-                                      setVideoPlaying(true);
+                                      setMobileVideosPlaying(prev => ({ ...prev, [index]: true }));
                                     }).catch((error) => {
                                       console.log('Video play failed:', error);
                                     });
                                   } else {
                                     video.pause();
-                                    setVideoPlaying(false);
+                                    setMobileVideosPlaying(prev => ({ ...prev, [index]: false }));
                                   }
                                 }
                               }}
