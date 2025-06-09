@@ -256,14 +256,14 @@ const Demo = () => {
           </div>
 
           {/* Mobile Version - Scrollable features */}
-          <div className="lg:hidden space-y-8 px-4">
+          <div className="lg:hidden space-y-8 px-2">
             {features.map((feature, index) => (
               <div
                 key={feature.id}
                 className="transition-all duration-500"
                 data-feature-index={index}
               >
-                <div className="bg-white rounded-2xl p-6 shadow-lg border w-full max-w-2xl mx-auto">
+                <div className="bg-white rounded-2xl p-6 shadow-lg border w-full max-w-4xl mx-auto">
                   <h3 className="text-2xl font-bold text-gray-900 mb-3">
                     {feature.title}
                   </h3>
@@ -307,7 +307,7 @@ const Demo = () => {
                         <div className="h-full relative" style={{ height: 'calc(100% - 2rem)' }}>
                           <video
                             id={`mobile-video-${index}`}
-                            autoPlay={!isMobile}
+                            autoPlay={false}
                             muted
                             loop
                             playsInline
@@ -321,18 +321,23 @@ const Demo = () => {
                             Your browser does not support the video tag.
                           </video>
                           
-                          {/* Mobile Play Button Overlay */}
-                          {isMobile && !videoPlaying && (
+                          {/* Mobile Play Button Overlay - Always show on mobile */}
+                          {isMobile && (
                             <div 
-                              className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center cursor-pointer"
+                              className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center cursor-pointer"
                               onClick={() => {
                                 const video = document.getElementById(`mobile-video-${index}`) as HTMLVideoElement;
                                 if (video) {
-                                  video.play().then(() => {
-                                    setVideoPlaying(true);
-                                  }).catch((error) => {
-                                    console.log('Video play failed:', error);
-                                  });
+                                  if (video.paused) {
+                                    video.play().then(() => {
+                                      setVideoPlaying(true);
+                                    }).catch((error) => {
+                                      console.log('Video play failed:', error);
+                                    });
+                                  } else {
+                                    video.pause();
+                                    setVideoPlaying(false);
+                                  }
                                 }
                               }}
                             >
