@@ -10,9 +10,6 @@ const Footer = () => {
               Discovering Toronto's best activities, one swipe at a time. 
               Join the community that's redefining how we explore our city.
             </p>
-            <div className="text-sm text-gray-500">
-              © 2025 Whats Poppin. All rights reserved.
-            </div>
           </div>
           
           <div>
