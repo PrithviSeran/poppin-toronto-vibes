@@ -1,4 +1,10 @@
+import { Instagram, Mail } from "lucide-react";
+
 const Footer = () => {
+  const openInstagram = () => {
+    window.open('https://instagram.com/whatspoppin.info', '_blank');
+  };
+
   return (
     <footer className="py-12 px-6 bg-gray-900 text-white">
       <div className="container mx-auto max-w-6xl">
@@ -24,8 +30,21 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Connect</h4>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="mailto:help@whatspoppin.info" className="hover:text-white transition-colors">Contact</a></li>
-
+              <li>
+                <a href="mailto:help@whatspoppin.info" className="flex items-center hover:text-white transition-colors">
+                  <Mail className="h-5 w-5 mr-2" />
+                  <span>Email</span>
+                </a>
+              </li>
+              <li>
+                <button 
+                  onClick={openInstagram}
+                  className="flex items-center hover:text-white transition-colors"
+                >
+                  <Instagram className="h-5 w-5 mr-2" />
+                  <span>Instagram</span>
+                </button>
+              </li>
             </ul>
           </div>
         </div>

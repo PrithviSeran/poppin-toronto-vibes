@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Instagram } from "lucide-react";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -25,6 +25,11 @@ const Header = () => {
     setMobileMenuOpen(false);
   };
 
+  const openInstagram = () => {
+    window.open('https://instagram.com/whatspoppin.info', '_blank');
+    setMobileMenuOpen(false);
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
@@ -40,6 +45,12 @@ const Header = () => {
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
+          <button 
+            onClick={openInstagram}
+            className="text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            <Instagram className="h-8 w-8" />
+          </button>
           <button onClick={scrollToFeatures} className="text-gray-600 hover:text-gray-900 transition-colors">Features</button>
           <button onClick={scrollToDemo} className="text-gray-600 hover:text-gray-900 transition-colors">Demo</button>
           <Button 
@@ -63,6 +74,13 @@ const Header = () => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200">
           <div className="container mx-auto px-6 py-4 space-y-4">
+            <button 
+              onClick={openInstagram}
+              className="flex items-center w-full text-left py-3 px-4 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+            >
+              <Instagram className="h-5 w-5 mr-2" />
+              <span>Instagram</span>
+            </button>
             <button 
               onClick={scrollToFeatures}
               className="block w-full text-left py-3 px-4 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
