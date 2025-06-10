@@ -33,7 +33,7 @@ const Footer = () => {
               <li>
                 <a href="mailto:help@whatspoppin.info" className="flex items-center hover:text-white transition-colors">
                   <Mail className="h-5 w-5 mr-2" />
-                  <span>Email</span>
+                  <span>help@whatspoppin.info</span>
                 </a>
               </li>
               <li>
@@ -42,7 +42,7 @@ const Footer = () => {
                   className="flex items-center hover:text-white transition-colors"
                 >
                   <Instagram className="h-5 w-5 mr-2" />
-                  <span>Instagram</span>
+                  <span> @whatspoppin.info</span>
                 </button>
               </li>
             </ul>
