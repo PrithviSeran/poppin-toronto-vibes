@@ -42,7 +42,7 @@ const Footer = () => {
                   className="flex items-center hover:text-white transition-colors"
                 >
                   <Instagram className="h-5 w-5 mr-2" />
-                  <span> @whatspoppin.info</span>
+                  <span> whatspoppin.info</span>
                 </button>
               </li>
             </ul>

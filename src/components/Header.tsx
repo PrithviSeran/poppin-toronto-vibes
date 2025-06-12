@@ -61,13 +61,21 @@ const Header = () => {
           </Button>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
-        >
-          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        {/* Mobile Navigation */}
+        <div className="md:hidden flex items-center space-x-2">
+          <button 
+            onClick={openInstagram}
+            className="p-2 text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            <Instagram className="h-6 w-6" />
+          </button>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 text-gray-600 hover:text-gray-900 transition-colors"
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation Menu */}
