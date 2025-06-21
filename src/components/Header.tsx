@@ -1,28 +1,60 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Instagram } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const navigateToHome = () => {
+    navigate('/');
+    setMobileMenuOpen(false);
+  };
+
+  const navigateToSection = (sectionId: string) => {
+    if (location.pathname === '/') {
+      // We're on the home page, just scroll to the section
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // We're on a different page, navigate to home and then scroll
+      navigate('/');
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+    setMobileMenuOpen(false);
+  };
 
   const scrollToHero = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
     setMobileMenuOpen(false);
   };
 
   const scrollToWaitlist = () => {
-    document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' });
-    setMobileMenuOpen(false);
+    navigateToSection('waitlist');
   };
 
   const scrollToFeatures = () => {
-    document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
-    setMobileMenuOpen(false);
+    navigateToSection('features');
   };
 
   const scrollToDemo = () => {
-    document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' });
+    navigateToSection('demo');
+  };
+
+  const navigateToEventHosters = () => {
+    navigate('/host-event');
     setMobileMenuOpen(false);
+    // Scroll to top after navigation
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
   };
 
   const openInstagram = () => {
@@ -51,8 +83,19 @@ const Header = () => {
           >
             <Instagram className="h-8 w-8" />
           </button>
+          {location.pathname !== '/' && (
+            <button onClick={navigateToHome} className="text-gray-600 hover:text-gray-900 transition-colors">Home</button>
+          )}
           <button onClick={scrollToFeatures} className="text-gray-600 hover:text-gray-900 transition-colors">Features</button>
           <button onClick={scrollToDemo} className="text-gray-600 hover:text-gray-900 transition-colors">Demo</button>
+          <Button 
+            onClick={navigateToEventHosters}
+            className={`bg-gradient-to-r from-[#FF0005] via-[#FF4D9D] to-[#9E95BD] text-white hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 px-6 py-2 rounded-full font-semibold ${
+              location.pathname === '/host-event' ? 'ring-2 ring-white ring-opacity-50' : ''
+            }`}
+          >
+            Host Event
+          </Button>
           <Button 
             onClick={scrollToWaitlist}
             className="bg-gradient-to-r from-[#FF0005] to-[#9E95BD] hover:opacity-90 transition-all duration-300"
@@ -89,6 +132,14 @@ const Header = () => {
               <Instagram className="h-5 w-5 mr-2" />
               <span>Instagram</span>
             </button>
+            {location.pathname !== '/' && (
+              <button 
+                onClick={navigateToHome}
+                className="block w-full text-left py-3 px-4 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
+              >
+                Home
+              </button>
+            )}
             <button 
               onClick={scrollToFeatures}
               className="block w-full text-left py-3 px-4 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors"
@@ -101,6 +152,14 @@ const Header = () => {
             >
               Demo
             </button>
+            <Button 
+              onClick={navigateToEventHosters}
+              className={`w-full bg-gradient-to-r from-[#FF0005] via-[#FF4D9D] to-[#9E95BD] text-white hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl font-semibold rounded-lg mb-2 ${
+                location.pathname === '/host-event' ? 'ring-2 ring-white ring-opacity-50' : ''
+              }`}
+            >
+              Host Event
+            </Button>
             <Button 
               onClick={scrollToWaitlist}
               className="w-full bg-gradient-to-r from-[#FF0005] to-[#9E95BD] hover:opacity-90 transition-all duration-300"

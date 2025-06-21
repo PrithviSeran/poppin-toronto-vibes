@@ -9,6 +9,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import Demo from "@/components/Demo";
+import EventHostCTA from "@/components/EventHostCTA";
 import Waitlist from "@/components/Waitlist";
 import Footer from "@/components/Footer";
 
@@ -19,6 +20,7 @@ const Index = () => {
       <Hero />
       <Features />
       <Demo />
+      <EventHostCTA />
       <Waitlist />
       <Footer />
     </div>
