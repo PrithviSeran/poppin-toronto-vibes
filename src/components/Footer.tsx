@@ -23,7 +23,7 @@ const Footer = () => {
             <ul className="space-y-2 text-gray-400">
               <li><a href="#features" className="hover:text-white transition-colors">Features</a></li>
               <li><a href="#demo" className="hover:text-white transition-colors">Demo</a></li>
-              <li><a href="/host-event" className="hover:text-white transition-colors">Host Event</a></li>
+              <li><a href="/host-event" className="hover:text-white transition-colors">Post Event</a></li>
               <li><a href="#waitlist" className="hover:text-white transition-colors">Beta Access</a></li>
             </ul>
           </div>

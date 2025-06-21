@@ -94,7 +94,7 @@ const Header = () => {
               location.pathname === '/host-event' ? 'ring-2 ring-white ring-opacity-50' : ''
             }`}
           >
-            Host Event
+            Post Event
           </Button>
           <Button 
             onClick={scrollToWaitlist}
@@ -158,7 +158,7 @@ const Header = () => {
                 location.pathname === '/host-event' ? 'ring-2 ring-white ring-opacity-50' : ''
               }`}
             >
-              Host Event
+              Post Event
             </Button>
             <Button 
               onClick={scrollToWaitlist}

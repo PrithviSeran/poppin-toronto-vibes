@@ -66,17 +66,17 @@ const EventHostCTA = () => {
             <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-0 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
               <CardContent className="p-8 text-center">
                 <div className="text-6xl mb-6">🚀</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Ready to Host?</h3>
-                <p className="text-gray-600 mb-8 leading-relaxed">
-                  Join hundreds of Toronto event organizers and party hosts who trust Whats Poppin to connect them with their ideal audience.
-                </p>
-                <Button
-                  onClick={navigateToHostEvent}
-                  size="lg"
-                  className="bg-gradient-to-r from-[#FF0005] via-[#FF4D9D] via-[#FF69E2] via-[#B97AFF] to-[#9E95BD] hover:opacity-90 transition-all duration-300 text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105"
-                >
-                  Host Your Event <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Ready to Post?</h3>
+                                  <p className="text-gray-600 mb-8 leading-relaxed">
+                    Join hundreds of Toronto event organizers and party posters who trust Whats Poppin to connect them with their ideal audience.
+                  </p>
+                                  <Button
+                    onClick={navigateToHostEvent}
+                    size="lg"
+                    className="bg-gradient-to-r from-[#FF0005] via-[#FF4D9D] via-[#FF69E2] via-[#B97AFF] to-[#9E95BD] hover:opacity-90 transition-all duration-300 text-lg px-8 py-6 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105"
+                  >
+                    Post Your Event <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
                 <div className="mt-6 text-sm text-gray-500">
                   ✨ Free to submit • Quick approval process
                 </div>

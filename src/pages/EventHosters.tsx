@@ -36,7 +36,7 @@ const EventHosters = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16 animate-fade-in">
             <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-              Host an Event on 
+              Post an Event on 
               <span className="bg-gradient-to-r from-[#FF0005] via-[#FF4D9D] via-[#FF69E2] via-[#B97AFF] to-[#9E95BD] bg-clip-text text-transparent"> Whats Poppin</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto mb-12 leading-relaxed">
@@ -174,7 +174,7 @@ const EventHosters = () => {
           <div className="text-center mt-16">
             <h3 className="text-3xl font-bold text-gray-900 mb-6">Ready to Get Started?</h3>
             <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-              Join hundreds of Toronto event organizers and party hosts who trust Whats Poppin to connect them with their ideal audience.
+              Join hundreds of Toronto event organizers and party posters who trust Whats Poppin to connect them with their ideal audience.
             </p>
             <Button
               onClick={openHostForm}
