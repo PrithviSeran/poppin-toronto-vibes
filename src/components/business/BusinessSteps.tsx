@@ -3,9 +3,19 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Upload, Calendar, MessageSquare, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { useNavigate } from "react-router-dom";
 
 const BusinessSteps = () => {
   const [currentPhase, setCurrentPhase] = useState(0);
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    // Navigate to home page and scroll to waitlist section
+    navigate('/');
+    setTimeout(() => {
+      document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
 
   const phases = [
     {
@@ -262,6 +272,7 @@ const BusinessSteps = () => {
             Ready to start your journey with us?
           </p>
           <motion.button
+            onClick={handleGetStarted}
             className="bg-gradient-to-r from-[#FF0005] via-[#FF4D9D] to-[#9E95BD] text-white px-8 py-4 rounded-full font-semibold hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
